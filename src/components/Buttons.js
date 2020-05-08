@@ -7,7 +7,7 @@ function Buttons(props) {
     buttons.push(
         <button 
             className="button"
-            onClick={() => {props.handleClick(false)}}
+            onClick={() => {props.handleClick()}}
         >
             {props.state.countdownInProgress ? 'Pause' : `${continueOrStart} ${workOrBreak}`}
         </button>
@@ -16,7 +16,7 @@ function Buttons(props) {
         buttons.push(
             <button 
                 className="button"
-                onClick={() => {props.handleClick(true)}}
+                onClick={() => {props.skipBreak()}}
             >
                 Skip break
             </button>

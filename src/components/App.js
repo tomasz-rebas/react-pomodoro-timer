@@ -18,6 +18,7 @@ class App extends React.Component {
             totalFocusTime: 0
         }
         this.handleClick = this.handleClick.bind(this);
+        this.skipBreak = this.skipBreak.bind(this);
         this.countdown = this.countdown.bind(this);
         this.timeFormatting = this.timeFormatting.bind(this);
     }
@@ -26,22 +27,22 @@ class App extends React.Component {
         setInterval(this.countdown, 1000);
     }
 
-    handleClick(skip) {
-        if (skip) {
-            this.setState({
-                timeRemaining: this.state.workSessionTime,
-                countdownInProgress: true,
-                workSessionActive: true,
+    handleClick() {
+        this.setState(prevState => {
+            return {
+                countdownInProgress: !prevState.countdownInProgress,
                 countdownStarted: true
-            });
-        } else {
-            this.setState(prevState => {
-                return {
-                    countdownInProgress: !prevState.countdownInProgress,
-                    countdownStarted: true
-                }
-            });
-        }
+            }
+        });
+    }
+
+    skipBreak() {
+        this.setState({
+            timeRemaining: this.state.workSessionTime,
+            countdownInProgress: true,
+            workSessionActive: true,
+            countdownStarted: true
+        });
     }
 
     countdown() {
@@ -92,6 +93,7 @@ class App extends React.Component {
                 <h1>Pomodoro Timer</h1>
                 <Buttons 
                     handleClick={this.handleClick}
+                    skipBreak={this.skipBreak}
                     state={this.state}
                 />
                 <h2 className="time">{this.timeFormatting(this.state.timeRemaining)}</h2>
