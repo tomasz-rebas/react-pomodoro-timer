@@ -1,6 +1,7 @@
 import React from 'react';
 import Buttons from './Buttons';
 import Statistics from './Statistics';
+import Form from './Form';
 
 class App extends React.Component {
 
@@ -96,8 +97,10 @@ class App extends React.Component {
                     skipBreak={this.skipBreak}
                     state={this.state}
                 />
-                <h2 className="time">{this.timeFormatting(this.state.timeRemaining)}</h2>
+                <h2>{this.timeFormatting(this.state.timeRemaining)}</h2>
                 <Statistics state={this.state}/>
+                <hr/>
+                <Form/>
             </div>
         );
     }

@@ -5,11 +5,19 @@ body {
   text-align: center;
 }
 
-.time {
+h2 {
   font-size: 100px;
 }
 
-.button {
+button {
   padding: 5px 10px;
   cursor: pointer;
+}
+
+hr {
+  width: 100px;
+}
+
+input[type=number] {
+  width: 80px;
 }
