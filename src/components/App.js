@@ -13,7 +13,8 @@ class App extends React.Component {
             workSessionActive: true,
             countdownStarted: false,
             workSessionsCount: 0,
-            breaksCount: 0
+            breaksCount: 0,
+            totalFocusTime: 0
         }
         this.handleClick = this.handleClick.bind(this);
         this.countdown = this.countdown.bind(this);
@@ -58,7 +59,8 @@ class App extends React.Component {
                             countdownInProgress: false,
                             workSessionActive: false,
                             countdownStarted: false,
-                            workSessionsCount: prevState.workSessionsCount + 1
+                            workSessionsCount: prevState.workSessionsCount + 1,
+                            totalFocusTime: prevState.totalFocusTime + this.state.workSessionTime
                         }
                     });
                 } else {
@@ -94,8 +96,9 @@ class App extends React.Component {
                     countdownStarted={this.state.countdownStarted}
                 />
                 <h2 className="time">{this.timeFormatting(this.state.timeRemaining)}</h2>
-                <p>Work sessions: {this.state.workSessionsCount}</p>
-                <p>Breaks: {this.state.breaksCount}</p>
+                <p>Work sessions: <b>{this.state.workSessionsCount}</b></p>
+                <p>Breaks: <b>{this.state.breaksCount}</b></p>
+                <p>Total focus time: <b>{this.state.totalFocusTime} seconds</b></p>
             </div>
         );
     }
