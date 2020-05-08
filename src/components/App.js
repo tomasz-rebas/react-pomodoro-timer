@@ -11,7 +11,9 @@ class App extends React.Component {
             workSessionTime: 3, /* 1500 */
             breakTime: 2, /* 300 */
             workSessionActive: true,
-            countdownStarted: false
+            countdownStarted: false,
+            workSessionsCount: 0,
+            breaksCount: 0
         }
         this.handleClick = this.handleClick.bind(this);
         this.countdown = this.countdown.bind(this);
@@ -50,18 +52,24 @@ class App extends React.Component {
                 });
             } else {
                 if (this.state.workSessionActive) {
-                    this.setState({
-                        timeRemaining: this.state.breakTime,
-                        countdownInProgress: false,
-                        workSessionActive: false,
-                        countdownStarted: false
+                    this.setState(prevState => {
+                        return {
+                            timeRemaining: this.state.breakTime,
+                            countdownInProgress: false,
+                            workSessionActive: false,
+                            countdownStarted: false,
+                            workSessionsCount: prevState.workSessionsCount + 1
+                        }
                     });
                 } else {
-                    this.setState({
-                        timeRemaining: this.state.workSessionTime,
-                        countdownInProgress: false,
-                        workSessionActive: true,
-                        countdownStarted: false
+                    this.setState(prevState => {
+                        return {
+                            timeRemaining: this.state.workSessionTime,
+                            countdownInProgress: false,
+                            workSessionActive: true,
+                            countdownStarted: false,
+                            breaksCount: prevState.breaksCount + 1
+                        }
                     });
                 }
             }
@@ -86,6 +94,8 @@ class App extends React.Component {
                     countdownStarted={this.state.countdownStarted}
                 />
                 <h2 className="time">{this.timeFormatting(this.state.timeRemaining)}</h2>
+                <p>Work sessions: {this.state.workSessionsCount}</p>
+                <p>Breaks: {this.state.breaksCount}</p>
             </div>
         );
     }
