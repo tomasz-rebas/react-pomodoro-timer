@@ -18,6 +18,7 @@ class App extends React.Component {
             breaksCount: 0,
             totalFocusTime: 0
         }
+        this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.skipBreak = this.skipBreak.bind(this);
         this.countdown = this.countdown.bind(this);
@@ -26,6 +27,20 @@ class App extends React.Component {
 
     componentDidMount() {
         setInterval(this.countdown, 1000);
+    }
+
+    handleChange(event) {
+        const {name, value} = event.target;
+        if ((name === 'workSessionTime' && this.state.workSessionActive) || (name === 'breakTime' && !this.state.workSessionActive)) {
+            this.setState({
+                timeRemaining: parseInt(value),
+                [name]: parseInt(value)
+            });
+        } else {
+            this.setState({
+                [name]: parseInt(value)
+            });
+        }
     }
 
     handleClick() {
@@ -100,7 +115,10 @@ class App extends React.Component {
                 <h2>{this.timeFormatting(this.state.timeRemaining)}</h2>
                 <Statistics state={this.state}/>
                 <hr/>
-                <Form/>
+                <Form 
+                    state={this.state}
+                    handleChange={this.handleChange}
+                />
             </div>
         );
     }
