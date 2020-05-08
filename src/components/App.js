@@ -1,5 +1,6 @@
 import React from 'react';
-import Button from './Button'
+import Buttons from './Buttons';
+import Statistics from './Statistics';
 
 class App extends React.Component {
 
@@ -89,16 +90,12 @@ class App extends React.Component {
         return (
             <div>
                 <h1>Pomodoro Timer</h1>
-                <Button 
+                <Buttons 
                     handleClick={this.handleClick}
-                    countdownInProgress={this.state.countdownInProgress}
-                    workSessionActive={this.state.workSessionActive}
-                    countdownStarted={this.state.countdownStarted}
+                    state={this.state}
                 />
                 <h2 className="time">{this.timeFormatting(this.state.timeRemaining)}</h2>
-                <p>Work sessions: <b>{this.state.workSessionsCount}</b></p>
-                <p>Breaks: <b>{this.state.breaksCount}</b></p>
-                <p>Total focus time: <b>{this.state.totalFocusTime} seconds</b></p>
+                <Statistics state={this.state}/>
             </div>
         );
     }

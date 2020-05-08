@@ -1,18 +1,18 @@
 import React from 'react';
 
-function Button(props) {
-    const continueOrStart = props.countdownStarted ? 'Continue' : 'Start';
-    const workOrBreak = props.workSessionActive ? 'working' : 'break';
+function Buttons(props) {
+    const continueOrStart = props.state.countdownStarted ? 'Continue' : 'Start';
+    const workOrBreak = props.state.workSessionActive ? 'working' : 'break';
     let buttons = [];
     buttons.push(
         <button 
             className="button"
             onClick={() => {props.handleClick(false)}}
         >
-            {props.countdownInProgress ? 'Pause' : `${continueOrStart} ${workOrBreak}`}
+            {props.state.countdownInProgress ? 'Pause' : `${continueOrStart} ${workOrBreak}`}
         </button>
     );
-    if (!props.workSessionActive) {
+    if (!props.state.workSessionActive) {
         buttons.push(
             <button 
                 className="button"
@@ -30,4 +30,4 @@ function Button(props) {
     );
 }
 
-export default Button;
+export default Buttons;
