@@ -8,6 +8,7 @@ function Form(props) {
                 <input 
                     type="number"
                     name="workSessionTime"
+                    min="0"
                     max="9999"
                     disabled={disabled}
                     onChange={props.handleChange}
@@ -18,6 +19,7 @@ function Form(props) {
                 <input 
                     type="number" 
                     name="breakTime"
+                    min="0"
                     max="9999" 
                     disabled={disabled}
                     onChange={props.handleChange}

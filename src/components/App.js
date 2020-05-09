@@ -106,9 +106,19 @@ class App extends React.Component {
     }
 
     timeFormatting(timeInSeconds) {
-        const minutes = Math.floor(timeInSeconds/60);
-        const seconds = timeInSeconds % 60;
-        const displayTime = seconds < 10 ? `${minutes}:0${seconds}` : `${minutes}:${seconds}`;
+        const hours = Math.floor(timeInSeconds/3600);
+        let minutes = Math.floor(timeInSeconds/60) - hours * 60;
+        let seconds = timeInSeconds % 60;
+
+        if (hours > 0 && minutes < 10) {
+            minutes = '0' + minutes;
+        }
+
+        if (seconds < 10) {
+            seconds = '0' + seconds;
+        }
+
+        const displayTime = hours > 0 ? `${hours}:${minutes}:${seconds}` : `${minutes}:${seconds}`;
         return displayTime;
     }
 
