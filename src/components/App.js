@@ -22,7 +22,6 @@ class App extends React.Component {
         this.handleClick = this.handleClick.bind(this);
         this.skipBreak = this.skipBreak.bind(this);
         this.countdown = this.countdown.bind(this);
-        this.timeFormatting = this.timeFormatting.bind(this);
     }
 
     componentDidMount() {
