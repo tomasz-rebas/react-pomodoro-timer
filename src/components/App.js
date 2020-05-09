@@ -33,13 +33,23 @@ class App extends React.Component {
         const {name, value} = event.target;
         if ((name === 'workSessionTime' && this.state.workSessionActive) || (name === 'breakTime' && !this.state.workSessionActive)) {
             this.setState({
-                timeRemaining: parseInt(value),
-                [name]: parseInt(value)
+                timeRemaining: this.validateTimeInput(parseInt(value)),
+                [name]: this.validateTimeInput(parseInt(value))
             });
         } else {
             this.setState({
-                [name]: parseInt(value)
+                [name]: this.validateTimeInput(parseInt(value))
             });
+        }
+    }
+
+    validateTimeInput(timeInput) {
+        if (Number.isNaN(timeInput)) {
+            return 0;
+        } else if (timeInput > 9999) {
+            return 9999;
+        } else {
+            return timeInput;
         }
     }
 
