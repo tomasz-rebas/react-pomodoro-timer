@@ -32,21 +32,31 @@ class App extends React.Component {
         const {name, value} = event.target;
         if ((name === 'workSessionTime' && this.state.workSessionActive) || (name === 'breakTime' && !this.state.workSessionActive)) {
             this.setState({
-                timeRemaining: this.validateTimeInput(parseInt(value)),
-                [name]: this.validateTimeInput(parseInt(value))
+                timeRemaining: this.validateTimeInput(value),
+                [name]: this.validateTimeInput(value)
             });
         } else {
             this.setState({
-                [name]: this.validateTimeInput(parseInt(value))
+                [name]: this.validateTimeInput(value)
             });
         }
     }
 
     validateTimeInput(timeInput) {
-        if (Number.isNaN(timeInput)) {
-            return 0;
+        for (let i = 0; i < timeInput.length; i++) {
+            if (timeInput[i] !== '0') {
+                timeInput = timeInput.substring(i);
+                break;
+            }
+            if (i === timeInput.length - 1) {
+                timeInput = '0';
+            }
+        }
+
+        if (timeInput < 0 || timeInput === '') {
+            return '0';
         } else if (timeInput > 9999) {
-            return 9999;
+            return '9999';
         } else {
             return timeInput;
         }
@@ -87,7 +97,7 @@ class App extends React.Component {
                             workSessionActive: false,
                             countdownStarted: false,
                             workSessionsCount: prevState.workSessionsCount + 1,
-                            totalFocusTime: prevState.totalFocusTime + this.state.workSessionTime
+                            totalFocusTime: parseInt(prevState.totalFocusTime) + parseInt(this.state.workSessionTime)
                         }
                     });
                 } else {
