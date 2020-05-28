@@ -1,3 +1,12 @@
+## Pomodoro Timer
+
+Features:
+- button for starting a countdown,
+- button for pausing/resuming a countdown,
+- button for skipping a break,
+- displaying statistics: work sessions/breaks count and total focus time,
+- two input fields for adjusting work session time and break time.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
